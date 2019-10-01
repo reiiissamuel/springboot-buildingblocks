@@ -16,6 +16,7 @@ import com.stacksimplify.restservices.entities.User;
 import com.stacksimplify.restservices.repositories.UserRepository;
 import com.stacksimplify.restservices.services.UserService;
 
+//controller
 @RestController
 public class UserController {
 	
