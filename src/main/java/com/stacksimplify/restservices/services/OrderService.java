@@ -51,14 +51,13 @@ public class OrderService {
 	
 	public Order getOrderById(List<Order> orders, Long orderId) throws OrderNotFoundException {
 		//Optional<Order> order = orderRepository.findAll(orderId);
-		//TODO consertar esse metodo que so retorna 404
+		//TODO consertar esse metodo para acessar o repositorio do order pra retornar os links certos no hateaos
 		if(orders.isEmpty()) {
 			throw new OrderNotFoundException("Order not found!");
 		}else {
 			for(int i = 0; i < orders.size(); i++) {
-				System.out.println(orders.get(i).getOrderid());
 				if(orders.get(i).getOrderid().equals(orderId)) {
-					System.out.println("Entrou aqui");
+					
 					return orders.get(i);
 					
 				}
