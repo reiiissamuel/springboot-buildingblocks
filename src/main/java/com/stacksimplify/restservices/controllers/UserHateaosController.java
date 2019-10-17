@@ -62,11 +62,22 @@ public class UserHateaosController {
 		
 		try {
 			Optional<User>  userOptional = userService.getUserById(id);
+			
+			//self link generating
 			User user = userOptional.get();
 			Long userId = user.getUserId();
 			Link selfLink = ControllerLinkBuilder.linkTo(this.getClass()).slash(userId).withSelfRel();
 			user.add(selfLink);
-			Resource<User> finalResource = new Resource<User>(user);
+			
+			//relationship link with getAllOrders
+			Resources<Order> orders = ControllerLinkBuilder.methodOn(OrderHateaosController.class).getAllOrders(userId);
+			Link ordersLink = ControllerLinkBuilder.linkTo(orders).withRel("all-orders");
+			user.add(ordersLink);
+			
+			//self link for getAllUsers
+			Link selfLinkUsers = ControllerLinkBuilder.linkTo(this.getClass()).withSelfRel();
+			
+			Resource<User> finalResource = new Resource<User>(user, selfLinkUsers);
 			return finalResource;
 		} catch (UserNotFoundException e) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());

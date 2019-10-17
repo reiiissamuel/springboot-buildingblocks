@@ -33,7 +33,7 @@ public class OrderHateaosController {
 		try {
 			List<Order> orders = orderService.getAllOrders(userId);
 			Resources<Order> finalResources = new Resources<Order>(orders);
-			return finalResources = new Resources<Order>(orders);
+			return finalResources;
 		} catch (UserNotFoundException e) {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
 		}
