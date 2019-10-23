@@ -30,7 +30,7 @@ public class UserModelMapperController {
 		Optional<User> userOptional = userService.getUserById(id);
 
 		if (!userOptional.isPresent()) {
-			throw new UserNotFoundException("User not founf");
+			throw new UserNotFoundException("User not found!");
 		}
 
 		User user = userOptional.get();
