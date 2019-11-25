@@ -17,7 +17,7 @@ import com.stacksimplify.restservices.repositories.UserRepository;
 
 @RestController
 @RequestMapping("/mapstruct/users")
-public class UserMapStructController { 
+public class UserMapStructController implements UserMapper { 
 	
 	@Autowired
 	private UserRepository userRepository;
@@ -38,5 +38,17 @@ public class UserMapStructController {
 		}
 		User user = userOptional.get();
 		return userMapper.usertoToUserMsDto(user);
+	}
+
+	@Override
+	public UserMsDto usertoToUserMsDto(User user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<UserMsDto> usersToUserDtos(List<User> users) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
