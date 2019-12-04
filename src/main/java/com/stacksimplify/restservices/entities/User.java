@@ -13,29 +13,33 @@ import javax.validation.constraints.Size;
 
 import org.springframework.hateoas.ResourceSupport;
 
-import com.fasterxml.jackson.annotation.JsonFilter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 //Entity
+@ApiModel(description = "Entity that represents user")
 @Entity
 @Table(name = "user")
 //@JsonIgnoreProperties({"firstname", "lastName"}) --Static Filtering JsonIgnore
 //@JsonFilter(value = "userFilter") //notation to enable the mapping filter
 public class User extends ResourceSupport {
 	
+	@ApiModelProperty(notes = "Auto generated unique id", required = true, position = 1)
 	@Id
 	@GeneratedValue
 	@JsonView(Views.External.class)
 	private Long userId;
 	
+	@ApiModelProperty(notes = "username should be in format flname", example = "samuel", required = false, position = 2)
+	@Size(min=2, max = 50)
 	@NotEmpty(message = "Username is a mandatory field.")
 	@Column(name = "USER_NAME", length=50, nullable=false, unique=true)
 	@JsonView(Views.External.class)
 	private String username;
 	
-	@Size(min=2, message="Firstname should have at least 2 characters")
+	@Size(min=2, max = 50, message="Firstname should have at least 2 characters")
 	@Column(name = "FIRST_NAME", length=50, nullable=false)
 	@JsonView(Views.External.class)
 	private String firstname;
